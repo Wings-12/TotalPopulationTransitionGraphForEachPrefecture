@@ -39,12 +39,18 @@ const CheckBoxList = () => {
 
   const [checkedItems, setCheckedItems] = useState({});
 
+  const sortInDescendingOrder = (prev) => {
+    if (prev.result && prev.result.data) {
+      prev.result.data.map((data) => {
+        data.data.reverse();
+      });
+    }
+  };
+
   const getPopulationComposition = () => {
     const path =
       "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=" +
       prefCode;
-
-    console.log(path);
 
     fetch(path, {
       headers: { "x-api-key": "NJgaOz1cA7SlWcx91WGP2DgUTJ8T7AQ3SIImDCBg" },
@@ -52,7 +58,11 @@ const CheckBoxList = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log("成功：" + prefName + "人口構成データ取得○");
-        setPopulationCompositionObj(data);
+        setPopulationCompositionObj(
+          data.result.data.map((data) => {
+            return data.data.reverse();
+          })
+        );
       })
       .catch((error) => {
         console.log("失敗：" + prefName + "人口構成データ取得✖");
