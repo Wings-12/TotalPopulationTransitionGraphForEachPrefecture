@@ -37,7 +37,7 @@ const CheckBoxList = () => {
       });
   }, []);
 
-  const [checkedItems, setCheckedItems] = useState({});
+  const [checkedItem, setCheckedItem] = useState({});
 
   const getPopulationComposition = () => {
     const path =
@@ -62,7 +62,7 @@ const CheckBoxList = () => {
       prefCode = eachResultPrefCode;
       getPopulationComposition();
 
-      setCheckedItems({
+      setCheckedItem({
         [event.target.id]: event.target.checked,
       });
     }
@@ -80,7 +80,7 @@ const CheckBoxList = () => {
                 onChange={(event) => {
                   handleChange(event, eachResult.prefCode);
                 }}
-                checked={checkedItems[i]}
+                checked={checkedItem[i] || false}
               />
             </label>
           );
