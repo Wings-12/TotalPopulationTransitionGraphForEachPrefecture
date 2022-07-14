@@ -17,7 +17,7 @@ const CheckBoxList = () => {
   let prefName = "";
   let prefCode = null;
 
-  const { populationCompositionObj, setPopulationCompositionObj } = useContext(
+  const { setPopulationCompositionObj } = useContext(
     PopulationCompositionContext
   );
 
@@ -39,14 +39,6 @@ const CheckBoxList = () => {
 
   const [checkedItems, setCheckedItems] = useState({});
 
-  const sortInDescendingOrder = (prev) => {
-    if (prev.result && prev.result.data) {
-      prev.result.data.map((data) => {
-        data.data.reverse();
-      });
-    }
-  };
-
   const getPopulationComposition = () => {
     const path =
       "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=" +
@@ -58,11 +50,7 @@ const CheckBoxList = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log("成功：" + prefName + "人口構成データ取得○");
-        setPopulationCompositionObj(
-          data.result.data.map((data) => {
-            return data.data.reverse();
-          })
-        );
+        setPopulationCompositionObj(data);
       })
       .catch((error) => {
         console.log("失敗：" + prefName + "人口構成データ取得✖");
@@ -83,7 +71,7 @@ const CheckBoxList = () => {
   return (
     <div>
       {prefecturesObj.result &&
-        prefecturesObj.result.map(function (eachResult, i) {
+        prefecturesObj.result.map((eachResult, i) => {
           return (
             <label key={i}>
               {(prefName = eachResult.prefName)}
