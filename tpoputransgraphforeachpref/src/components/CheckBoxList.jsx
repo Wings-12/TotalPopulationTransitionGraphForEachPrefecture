@@ -83,8 +83,8 @@ const CheckBoxList = () => {
     <div>
       {sevenAreas.map((eachArea, index) => {
         return (
-          <Fragment key={index}>
-            <label>{eachArea}</label>
+          <div key={index} className={classes.frame}>
+            <label className={classes.sevenAreasTitle}>{eachArea}</label>
             <ul>
               {(() => {
                 return (
@@ -135,7 +135,7 @@ const CheckBoxList = () => {
                 );
               })()}
             </ul>
-          </Fragment>
+          </div>
         );
       })}
     </div>
