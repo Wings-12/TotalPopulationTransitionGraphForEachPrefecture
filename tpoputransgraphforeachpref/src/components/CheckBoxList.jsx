@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, Fragment } from "react";
 import { PopulationCompositionContext } from "./providers/PopulationCompositionProvider";
+import { GraphDataContext } from "./providers/GraphDataProvider";
 import classes from "./CheckBoxList.module.scss";
 const CheckBox = ({ id, onChange, checked }) => {
   return (
@@ -15,9 +16,11 @@ const CheckBoxList = () => {
   const [prefecturesObj, setPrefecturesObj] = useState([]);
   let prefName = "";
   let prefCode = null;
-  const { setPopulationCompositionObj } = useContext(
+  const { populationCompositionObj, setPopulationCompositionObj } = useContext(
     PopulationCompositionContext
   );
+  const { graphData, setGraphData } = useContext(GraphDataContext);
+
   useEffect(() => {
     fetch("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
       headers: { "x-api-key": "NJgaOz1cA7SlWcx91WGP2DgUTJ8T7AQ3SIImDCBg" },
@@ -59,6 +62,7 @@ const CheckBoxList = () => {
       });
     }
   };
+
   const sevenAreas = [
     "北海道東北",
     "関東",
@@ -101,6 +105,29 @@ const CheckBoxList = () => {
                               id={i}
                               onChange={(event) => {
                                 handleChange(event, eachResult.prefCode);
+                                // バグあり。
+                                // 内容：
+                                // 1. 一番最初のデータが更新されない
+                                // 2. データが足りない
+                                // 3. 表を表示した後に2回目チェックボックスにチェックを入れると、データが降順ソートされない
+                                setGraphData([
+                                  {
+                                    labels:
+                                      populationCompositionObj.result.data[0]
+                                        .data[0].year,
+                                    総人口人数:
+                                      populationCompositionObj.result.data[0]
+                                        .data[0].value,
+                                  },
+                                  {
+                                    labels:
+                                      populationCompositionObj.result.data[0]
+                                        .data[1].year,
+                                    総人口人数:
+                                      populationCompositionObj.result.data[0]
+                                        .data[1].value,
+                                  },
+                                ]);
                               }}
                               checked={checkedItem[i] || false}
                             />
