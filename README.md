@@ -1,7 +1,7 @@
 # Webアプリ：都道府県別の総人口推移グラフを表示するSPA
 
 ## 制作環境
-・Reactのバージョン：React18
+・Reactのバージョン：React18  
 ・OS：Windows10
 ・エディタ：VSCode
 ・ブラウザ：Chrome（バージョン: 103.0.5060.66（Official Build） （64 ビット））
