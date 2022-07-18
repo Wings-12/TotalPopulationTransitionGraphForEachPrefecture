@@ -1,17 +1,17 @@
 import { createContext, useState } from "react";
 
-export const PopulationCompositionContext = createContext({});
+export const PopuComposContext = createContext({});
 
-export const PopulationCompositionProvider = (props) => {
+export const PopuComposProvider = (props) => {
   const { children } = props;
 
   const [populationCompositionObj, setPopulationCompositionObj] = useState({});
 
   return (
-    <PopulationCompositionContext.Provider
+    <PopuComposContext.Provider
       value={{ populationCompositionObj, setPopulationCompositionObj }}
     >
       {children}
-    </PopulationCompositionContext.Provider>
+    </PopuComposContext.Provider>
   );
 };

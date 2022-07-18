@@ -1,12 +1,11 @@
 import React, { Fragment, useContext, useState } from "react";
 import { LineChart, Line, XAxis, CartesianGrid, Legend, YAxis } from "recharts";
-import { PopulationCompositionContext } from "./providers/PopulationCompositionProvider";
+import { PopuComposContext } from "./providers/PopuComposProvider";
 import { GraphDataContext } from "./providers/GraphDataProvider";
 
 export const LineGraph = () => {
-  const { populationCompositionObj, setPopulationCompositionObj } = useContext(
-    PopulationCompositionContext
-  );
+  const { populationCompositionObj, setPopulationCompositionObj } =
+    useContext(PopuComposContext);
 
   const { graphData, setGraphData } = useContext(GraphDataContext);
 

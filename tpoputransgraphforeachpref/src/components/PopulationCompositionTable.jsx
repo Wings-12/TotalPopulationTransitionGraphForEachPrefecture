@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
-import { PopulationCompositionContext } from "./providers/PopulationCompositionProvider";
+import { PopuComposContext } from "./providers/PopuComposProvider";
 
 const PopulationCompositionTable = () => {
-  const { populationCompositionObj } = useContext(PopulationCompositionContext);
+  const { populationCompositionObj } = useContext(PopuComposContext);
 
   const sortInDescendingOrder = () => {
     if (
