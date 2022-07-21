@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useContext, Fragment } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { PopuComposContext } from "./providers/PopuComposProvider";
 import classes from "./CheckBoxList.module.scss";
+import { GraphDataContext } from "./providers/GraphDataProvider";
+
 const CheckBox = ({ id, onChange, checked }) => {
   return (
     <input
@@ -33,7 +35,11 @@ const CheckBoxList = () => {
         console.log("失敗：都道府県一覧データ取得✖");
       });
   }, []);
+
   const [checkedItem, setCheckedItem] = useState({});
+
+  const { graphData, setGraphData } = useContext(GraphDataContext);
+
   const getPopulationComposition = () => {
     const path =
       "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=" +
@@ -45,6 +51,28 @@ const CheckBoxList = () => {
       .then((data) => {
         // console.log("成功：" + prefName + "人口構成データ取得○");
         setPopulationCompositionObj(data);
+
+        // チェックボックスにチェックが入ったら、グラフを表示させるようにしないと、X軸にautoなど、ユーザーがわからない情報が表示されてしまう。
+        // → チェックボックスにチェックがが入ったら、グラフを表示させるように作る。
+        // バグあり。
+        // 内容：
+        // 1. 一番最初のデータが（グラフクリックに紐づけると、クリックした状態の時に）更新されない　←チェックボックスリストでgetPopulationCompositionを呼ぶときにthenでdataを取ってきて、そのデータでgraphDataを設定すれば良い？　→　修正。グラフデータを比較して...　→　Y軸が見切れててデータを確認できない。　また、点の部分のデータが数字で表すなどしないと、正確にいくつかわからない。
+        // 2. データが足りない
+        // 3. 表を表示した後に2回目チェックボックスにチェックを入れると、データが降順ソートされない
+        data.result.data.map((data) => {
+          data.data.reverse();
+        });
+
+        setGraphData([
+          {
+            年: data.result.data[0].data[0].year,
+            総人口人数: data.result.data[0].data[0].value,
+          },
+          {
+            labels: data.result.data[0].data[1].year,
+            総人口人数: data.result.data[0].data[1].value,
+          },
+        ]);
       })
       .catch((error) => {
         console.log("失敗：" + prefName + "人口構成データ取得✖");

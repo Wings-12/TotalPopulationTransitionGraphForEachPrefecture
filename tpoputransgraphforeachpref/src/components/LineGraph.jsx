@@ -15,8 +15,8 @@ export const LineGraph = () => {
     <div>
       <LineChart width={700} height={500} data={graphData}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="labels" interval="preserveStartEnd" />
-        <YAxis interval="preserveStartEnd" />
+        <XAxis dataKey="年" interval="preserveStartEnd" />
+        <YAxis width={100} />
         <Legend />
         <Line
           type="monotone"

@@ -25,7 +25,7 @@ const PopulationCompositionTable = () => {
       <table border={"1"}>
         <tbody>
           <tr>
-            <th>{sortInDescendingOrder()}西暦</th>
+            <th>西暦</th>
             {populationCompositionObj.result.data.map((data4Types, i) => {
               return (
                 <Fragment key={i}>
