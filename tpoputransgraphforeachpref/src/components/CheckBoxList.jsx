@@ -22,7 +22,7 @@ const CheckBoxList = () => {
 
   useEffect(() => {
     fetch("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
-      headers: { "x-api-key": "NJgaOz1cA7SlWcx91WGP2DgUTJ8T7AQ3SIImDCBg" },
+      headers: { "x-api-key": process.env.REACT_APP_API_KEY },
     })
       .then((res) => {
         return res.json();
