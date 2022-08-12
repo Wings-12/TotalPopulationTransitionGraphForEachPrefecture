@@ -15,9 +15,6 @@ const PopulationCompositionTable = () => {
     }
   };
 
-  const population = "（人数）";
-  const percentage = "（割合）";
-
   let totalPopulation = 0;
 
   return (
@@ -29,11 +26,11 @@ const PopulationCompositionTable = () => {
             {populationCompositionObj.result.data.map((data4Types, i) => {
               return (
                 <Fragment key={i}>
-                  <th>{data4Types.label + population}</th>
+                  <th>{data4Types.label + "（人数）"}</th>
                   <th>
                     {data4Types.label === "総人口"
                       ? data4Types.label + "（増加率）"
-                      : data4Types.label + percentage}
+                      : data4Types.label + "（割合）"}
                   </th>
                 </Fragment>
               );
