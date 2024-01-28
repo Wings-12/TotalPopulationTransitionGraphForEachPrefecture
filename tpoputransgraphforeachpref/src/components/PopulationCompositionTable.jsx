@@ -1,7 +1,9 @@
 import React, { Fragment, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { PopulationCompositionContext } from "./providers/PopulationCompositionProvider";
 
 const PopulationCompositionTable = () => {
+  const { t } = useTranslation(); // 翻訳関数の使用 tはそのまま使わないといけない
   const { populationCompositionObj } = useContext(PopulationCompositionContext);
 
   const sortInDescendingOrder = () => {
@@ -15,9 +17,6 @@ const PopulationCompositionTable = () => {
     }
   };
 
-  const population = "（人数）";
-  const percentage = "（割合）";
-
   let totalPopulation = 0;
 
   return (
@@ -25,15 +24,28 @@ const PopulationCompositionTable = () => {
       <table border={"1"}>
         <tbody>
           <tr>
-            <th>{sortInDescendingOrder()}西暦</th>
+            <th>
+              {sortInDescendingOrder()}
+              {t("year")}
+            </th>
             {populationCompositionObj.result.data.map((data4Types, i) => {
+              // 人口の種類を英語のキーにマッピングするオブジェクト
+              const populationTypeKeyToEnglish = {
+                総人口: "total_population",
+                年少人口: "youth_population",
+                生産年齢人口: "working_age_population",
+                老年人口: "elderly_population",
+              };
+
+              const populationTypeKey =
+                populationTypeKeyToEnglish[data4Types.label];
               return (
                 <Fragment key={i}>
-                  <th>{data4Types.label + population}</th>
+                  <th>{t(populationTypeKey) + t("number_of_people")}</th>
                   <th>
                     {data4Types.label === "総人口"
-                      ? data4Types.label + "（増加率）"
-                      : data4Types.label + percentage}
+                      ? t(populationTypeKey) + t("growth_rate")
+                      : t(populationTypeKey) + t("percentage")}
                   </th>
                 </Fragment>
               );

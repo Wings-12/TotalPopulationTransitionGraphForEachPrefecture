@@ -2,7 +2,7 @@
 
 [Translate in Japanese](./README.md)
 
-![App Image](./tpoputransgraphforeachpref/images/appImage.png)
+![App Image](./tpoputransgraphforeachpref/images/appImage_EN.png)
 
 This web app is a Single Page Application (SPA) that visually displays population trend data by prefecture in Japan, obtained from the RESAS-API (Regional Economy Analysis System). When you click on the checkbox, you will see the population trends for that prefecture.
 
@@ -23,6 +23,7 @@ Click on a checkbox within the application. The total population trend data corr
 
 - Intuitive operation using checkboxes for each prefecture
 - Display of the latest total population data obtained from RESAS-API in a table
+- Language switch button for English/Japanese
 
 ## How to Instll
 
