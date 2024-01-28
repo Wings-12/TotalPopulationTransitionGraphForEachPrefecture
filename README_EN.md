@@ -4,7 +4,8 @@
 
 ![App Image](./tpoputransgraphforeachpref/images/appImage_EN.png)
 
-This web app is a Single Page Application (SPA) that visually displays population trend data by prefecture in Japan, obtained from the RESAS-API (Regional Economy Analysis System). When you click on the checkbox, you will see the population trends for that prefecture.
+This web app is a Single Page Application (SPA) that visually displays population trend data by prefecture in Japan, obtained from the RESAS-API (Regional Economy Analysis System). When you click on the checkbox, you will see the population trends for that prefecture.  
+(This is a web application created for a company's employment exam assignment for a week.)
 
 ## Development Environment
 
